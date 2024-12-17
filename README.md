@@ -1,5 +1,5 @@
 # Automatic-MisPronunciation-Detector-and-Corrector
-This repository is part of our Final Year Major Project based on title **Automatic-MisPronunciation-Detector-and-Corrector**
+This repository is part of our Final Year Major Project based on title : **"Automatic-MisPronunciation-Detector-and-Corrector"**
 
 ## To deploy this app on your device
 

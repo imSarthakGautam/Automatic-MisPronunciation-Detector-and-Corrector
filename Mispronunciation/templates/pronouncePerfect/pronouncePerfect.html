@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+
+{% block title %}
+Pronounce Perfect 
+{% endblock title %}
+
+{% block content %}
+<main>
+    <section class="word-box" id="wordBox">
+      <p>This is our <span class="highlight">major project</span></p>
+    </section>
+    <section class="section-container">
+      <div class="card audio-interaction">
+        <h2>Speak or Upload Audio</h2>
+        
+        <!-- Speak Section -->
+        <div class="speak-section">
+          <button class="speak-button" id="recordButton">
+            <div class="icon-container">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <span>Start Speaking</span>
+          </button>
+          <button class="stop-button" id="stopButton" disabled>
+            <div class="icon-container">
+              <i class="fas fa-stop"></i>
+            </div>
+            <span>Stop</span>
+          </button>
+          <p id="recordingStatus">Press the button to start speaking...</p>
+        </div>
+      
+        <!-- Divider -->
+        <hr class="divider" />
+      
+        <!-- Upload Section -->
+        <div class="upload-section">
+          <h4>Or Upload an Audio File</h4>
+          <label for="audioUpload" class="audio-upload-label">
+            Choose Audio File:
+          </label>
+          <input 
+            type="file" 
+            id="audioUpload" 
+            name="audioFile" 
+            accept="audio/*" 
+            class="audio-upload-input"
+          />
+        </div>
+      
+        <!-- Submit Button -->
+        <button id="submitAudio" class="submit-btn">Submit Audio</button>
+      </div>
+      
+
+    <div class="card listen">
+      <div class="progress">
+        <h3>Today's Progress</h3>
+        <p>100 / 1000 Words spoken</p>
+      </div>
+      <div class="progress-percentage">
+        <li>
+          <div
+            class="mh-progress mh-progress-circle"
+            data-progress="10"
+          ></div>
+          <div class="rate">Completion</div>
+        </li>
+        <li>
+          <div
+            class="mh-progress mh-progress-circle"
+            data-progress="75"
+          ></div>
+          <div class="rate">Accuracy</div>
+        </li>
+      </div>
+    </div>
+
+    </div>
+      
+    </section>
+  </main>
+{% endblock content %}

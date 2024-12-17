@@ -1,0 +1,5 @@
+__pycache__/
+.venv/
+audio_files/
+audio/
+fine_tuned_model/

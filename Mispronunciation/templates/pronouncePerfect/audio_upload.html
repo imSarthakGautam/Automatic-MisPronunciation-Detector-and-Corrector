@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block title %}
+Audio Input
+{% endblock title %}
+
+{% block content %}
+<form id="audioForm" action="{% url 'process_audio'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="audio" accept="audio/*" />
+    <button type="submit">Submit</button>
+</form>
+
+<div id="result">
+    <h3>Transcription:</h3>
+    <p id="transcriptionResult">Submit an audio file to see the transcription here.</p>
+</div>
+
+<script>
+    const form = document.getElementById('audioForm');
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        console.log('Form submitted');
+        const formData = new FormData(form);
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        try {
+            const response = await fetch('/process-audio/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+            });
+            if (response.ok) {
+                const result = await response.json();
+                document.getElementById('transcriptionResult').textContent = result.transcription;
+            } else {
+                console.error('Server error:', response.status);
+                document.getElementById('transcriptionResult').textContent = 'Error occurred during transcription.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('transcriptionResult').textContent = 'Failed to process audio.';
+        }
+    };
+</script>
+{% endblock content %}
