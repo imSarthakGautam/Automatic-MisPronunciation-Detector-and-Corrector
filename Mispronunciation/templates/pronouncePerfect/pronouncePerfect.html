@@ -7,7 +7,12 @@ Pronounce Perfect
 {% block content %}
 <main>
     <section class="word-box" id="wordBox">
-      <p>This is our <span class="highlight">major project</span></p>
+      
+      <div id="result">
+        <h3><span class="highlight">Transcription</span></h3>
+        <p id="transcriptionResult">Submit an audio file to see the transcription here.</p>
+    </div>
+    
     </section>
     <section class="section-container">
       <div class="card audio-interaction">
@@ -17,17 +22,14 @@ Pronounce Perfect
         <div class="speak-section">
           <button class="speak-button" id="recordButton">
             <div class="icon-container">
-              <i class="fas fa-microphone"></i>
+              <i class="fas fa-microphone" id="microphoneIcon"></i>
             </div>
-            <span>Start Speaking</span>
+            <span id="buttonLabel">Start Speaking</span>
           </button>
-          <button class="stop-button" id="stopButton" disabled>
-            <div class="icon-container">
-              <i class="fas fa-stop"></i>
-            </div>
-            <span>Stop</span>
-          </button>
+          
           <p id="recordingStatus">Press the button to start speaking...</p>
+          <audio id="audioPlayback" controls hidden></audio>
+          <button id="downloadButton" hidden> Submit audio </button>
         </div>
       
         <!-- Divider -->
@@ -39,17 +41,15 @@ Pronounce Perfect
           <label for="audioUpload" class="audio-upload-label">
             Choose Audio File:
           </label>
-          <input 
-            type="file" 
-            id="audioUpload" 
-            name="audioFile" 
-            accept="audio/*" 
-            class="audio-upload-input"
-          />
+          <form id="audioForm" action="{% url 'process_audio'%}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="audio" accept="audio/*" />
+            <button type="submit">Submit Audio</button>
+        </form>
         </div>
       
-        <!-- Submit Button -->
-        <button id="submitAudio" class="submit-btn">Submit Audio</button>
+        
+        
       </div>
       
 
@@ -80,4 +80,7 @@ Pronounce Perfect
       
     </section>
   </main>
+
+  
+
 {% endblock content %}

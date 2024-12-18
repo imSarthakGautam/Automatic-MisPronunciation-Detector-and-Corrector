@@ -121,6 +121,24 @@ body {
     cursor: pointer;
     margin-top: 20px;
   }
+
+  .speak-button.recording {
+    background-color: red !important;
+  }
+
+  /* Change icon color during recording */
+  .speak-button.recording .icon-container i {
+    color: red !important;
+  }
+
+  .recording .speak-button {
+    background-color: #ff4d4d;
+  }
+
+  #recordingStatus {
+    margin-top: 10px;
+    font-style: italic;
+  }
   
   .speak-button img {
     width: 50px;
@@ -181,6 +199,13 @@ body {
     color: #070000;
     font-weight: bolder;
   }
+
+  .red-text {
+    color: red;
+    font-weight: bold;
+}
+
+
   
   /* Circular Progress Bar Styles */
   .mh-progress-circle {

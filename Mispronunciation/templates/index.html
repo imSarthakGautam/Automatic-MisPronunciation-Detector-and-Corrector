@@ -5,6 +5,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
     <title>
       {% block title %} 
       Mispronunciation Detection
@@ -39,6 +41,9 @@
     {% block content %}
        Content Here
     {% endblock %}
+    <script src="{% static 'pronouncePerfect/js/audio_submit.js' %}"></script>
+    <script src="{% static 'pronouncePerfect/js/recording.js' %}"></script>
     <script src="{% static 'pronouncePerfect/js/script.js' %}"></script>
+    
   </body>
 </html>
