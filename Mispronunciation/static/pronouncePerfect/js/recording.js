@@ -105,9 +105,10 @@ downloadButton.addEventListener("click", async () => {
         });
 
         if (response.ok) {
-            console.log('response has arrived')
+            console.log('response has arrived here')
             const result = await response.json();
-            document.getElementById('transcriptionResult').textContent = 'Error occurred during transcription.';
+            console.log(result)
+            document.getElementById('transcriptionResult').textContent = result.transcription;
         } else {
             console.error("Server error:", response.status);
             document.getElementById("recordingStatus").textContent = "Error occurred during transcription.";
