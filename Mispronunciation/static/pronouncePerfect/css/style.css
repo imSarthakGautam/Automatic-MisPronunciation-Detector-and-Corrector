@@ -1,252 +1,309 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
-  
-  /* Header Styles */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li {
-    margin: 0 10px;
-  }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: #000;
-  }
-  
-  .header-buttons {
-    display: flex;
-  }
-  
-  .header-buttons button {
-    margin-left: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .header-buttons .donate {
-    background-color: #4caf50;
-    color: #fff;
-  }
-  
-  .header-buttons .login {
-    background-color: #f1f1f1;
-    color: #000;
-  }
-  
-  /* Main Content Styles */
-  main {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 20px;
-    width: 100%;
-    margin-top: 30px;
-  }
-  
-  .word-box {
-    display: flex;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    justify-content: center;
-    text-align: center;
-    font-weight: bold;
-    font-size: 28px;
-    margin-bottom: 20px;
-    width: 80%;
-  }
-  
-  .highlight {
-    color: #ff6347; /* Color for highlighted text */
-    font-weight: bolder;
-  }
-  
-  .section-container {
-    display: flex;
-    justify-content: space-around;
-    align-self: center;
-    width: 85%;
-  }
-  
-  .card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    width: 40%;
-  }
-  
-  .speak-button {
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-
-  .speak-button.recording {
-    background-color: red !important;
-  }
-
-  /* Change icon color during recording */
-  .speak-button.recording .icon-container i {
-    color: red !important;
-  }
-
-  .recording .speak-button {
-    background-color: #ff4d4d;
-  }
-
-  #recordingStatus {
-    margin-top: 10px;
-    font-style: italic;
-  }
-  
-  .speak-button img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  /* Icon Container Styles */
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 100px;
-    background-color: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .icon-container:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .fas.fa-microphone {
-    font-size: 50px;
-    color: #000000;
-    transition: transform 0.3s ease;
-  }
-  
-  .icon-container:hover .fas.fa-microphone {
-    transform: scale(1.2);
-  }
-  
-  /* Listen Section Styles */
-  .listen .progress {
-    margin-bottom: 20px;
-  }
-  
-  /* Progress Percentage Styles */
-  .progress-percentage {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .progress-percentage li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-  }
-  
-  .rate {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #070000;
-    font-weight: bolder;
-  }
-
-  .red-text {
-    color: red;
-    font-weight: bold;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  
-  /* Circular Progress Bar Styles */
-  .mh-progress-circle {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    border-radius: 50%;
-    background: conic-gradient(
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.header-buttons button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header-buttons .donate {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.header-buttons .login {
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+/* Main Content Layout */
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* Word Box (Transcription Area) */
+.word-box {
+  display: flex;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.highlight {
+  color: #ff6347; /* Highlighted text */
+  font-weight: bolder;
+}
+
+/* Section Containers */
+.section-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 85%;
+  gap: 20px;
+}
+
+/* Cards for Interaction */
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 45%;
+}
+
+/* Speak and Upload Sections Side-by-Side */
+.audio-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Speak Button Styling */
+.speak-section, .upload-section {
+  flex: 1;
+  text-align: center;
+  min-width: 300px;
+}
+
+.speak-button {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.speak-button.recording {
+  background-color: red !important;
+}
+
+/* Microphone Icon Styles */
+.icon-container {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.fas.fa-microphone {
+  font-size: 50px;
+  color: #000000;
+  transition: transform 0.3s ease;
+}
+
+.icon-container:hover .fas.fa-microphone {
+  transform: scale(1.2);
+}
+
+/* Audio Playback and Recording Status */
+#recordingStatus {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Upload Section */
+.upload-section {
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.upload-section h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.upload-section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-section input {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Progress Bars */
+.listen .progress {
+  margin-bottom: 20px;
+}
+
+.progress-percentage {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.progress-percentage li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.rate {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #070000;
+  font-weight: bolder;
+}
+
+.red-text {
+  color: red;
+  font-weight: bold;
+}
+
+/* Circular Progress Bar */
+.mh-progress-circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 50%;
+  background: conic-gradient(
       #4caf50 0% calc(var(--progress) * 1%),
       #ddd calc(var(--progress) * 1%) 100%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mh-progress-circle::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.mh-progress-circle::after {
+  content: attr(data-progress) "%";
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  z-index: 2;
+}
+
+/* Progress Bar Custom Properties */
+.mh-progress[data-progress="10"] {
+  --progress: 10;
+}
+
+.mh-progress[data-progress="75"] {
+  --progress: 75;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .section-container {
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .mh-progress-circle::before {
-    content: "";
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: white;
-    border-radius: 50%;
-    z-index: 1;
+
+  .card {
+      width: 90%;
+      margin-bottom: 20px;
   }
-  
-  .mh-progress-circle::after {
-    content: attr(data-progress) "%";
-    position: absolute;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    z-index: 2;
+
+  .audio-input-container {
+      flex-direction: column;
+      align-items: center;
   }
-  
-  /* Data Progress Custom Property */
-  .mh-progress[data-progress="10"] {
-    --progress: 10;
+
+  nav ul {
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .mh-progress[data-progress="75"] {
-    --progress: 75;
+
+  nav ul li {
+      margin: 5px 0;
   }
-  
+}

@@ -1,0 +1,17 @@
+/* Typography */
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+.highlight {
+    color: #ff6347;
+    font-weight: bolder;
+}
+
+/* Button Base */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

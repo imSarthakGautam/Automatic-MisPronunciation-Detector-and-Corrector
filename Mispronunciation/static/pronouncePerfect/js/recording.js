@@ -1,120 +1,91 @@
 let mediaRecorder;
-let audioChunks = [];
-let isRecording = false; // Toggle state for recording
-let audioBlob;
-let audioURL;
+let audioBlob = null;
 
 const recordButton = document.getElementById("recordButton");
-const recordingStatus = document.getElementById("recordingStatus");
-const buttonLabel = document.getElementById("buttonLabel");
-const audioPlayback = document.getElementById("audioPlayback");
-const downloadButton = document.getElementById("downloadButton");
+const audioUpload = document.getElementById("audioUpload");
+const submitButton = document.getElementById("submitAudioButton");
 
-recordButton.addEventListener("click", async () => {
+/* Function to enable submit button */
+function enableSubmitButton() {
+    submitButton.classList.add("enabled");
+    submitButton.disabled = false;
+}
 
-//const isRecording = recordButton.classList.toggle('recording'); // Toggle recording state
-document.getElementById('recordingStatus').textContent = isRecording
-        ? 'Recording.....'
-        : 'Press the button to start speaking...';
+/* Function to disable submit button */
+function disableSubmitButton() {
+    submitButton.classList.remove("enabled");
+    submitButton.disabled = true;
+}
 
-        if (isRecording) {
-            recordingStatus.classList.add('recording-text');
-        } else {
-            recordingStatus.classList.remove('recording-text');
-        }
-
-  if (!isRecording) {
-    // Start recording
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      // Initialize MediaRecorder
-      mediaRecorder = new MediaRecorder(stream);
-      mediaRecorder.start();
-
-      // Update UI
-      isRecording = true;
-      buttonLabel.textContent = "Stop Speaking";
-      recordingStatus.innerHTML = '<span style="color: red; font-weight: bold;">Recording...</span> Press the button to stop.';
-      recordButton.classList.add("recording");
-
-      // Collect audio data
-      mediaRecorder.ondataavailable = (event) => {
-        audioChunks.push(event.data);
-      };
-
-      mediaRecorder.onstop = () => {
-        // Combine chunks into Blob
-        audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-        audioChunks = []; // Clear chunks for next recording
-
-        // Create playback URL
-        audioURL = URL.createObjectURL(audioBlob);
-        audioPlayback.src = audioURL;
-        audioPlayback.hidden = false;
-        downloadButton.hidden = false;
-
-        // Save the blob for submission
-        downloadButton.audioBlob = audioBlob;
-
-        // Stop the stream
-        stream.getTracks().forEach((track) => track.stop());
-      };
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
-      recordingStatus.textContent = "Error accessing microphone. Please check permissions.";
+/* Enable submit when file is uploaded */
+audioUpload.addEventListener("change", function () {
+    if (audioUpload.files.length > 0) {
+        enableSubmitButton();
+    } else {
+        disableSubmitButton();
     }
-  } else {
-    // Stop recording
-    if (mediaRecorder && mediaRecorder.state === "recording") {
-      mediaRecorder.stop();
-
-      // Update UI
-      isRecording = false;
-      buttonLabel.textContent = "Start Speaking";
-      recordingStatus.textContent = "Recording stopped. You can play or download the audio.";
-      recordButton.classList.remove("recording");
-    }
-  }
 });
 
-// Download the recorded audio
+/* Enable submit when recording is done */
+recordButton.addEventListener("click", async () => {
+    if (!mediaRecorder || mediaRecorder.state === "inactive") {
+        // Start recording
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
 
-downloadButton.addEventListener("click", async () => {
-    console.log('Send button clicked')
-    const audioBlob = downloadButton.audioBlob;
+        recordButton.textContent = "Stop Speaking";
+        recordButton.classList.add("recording");
 
-    if (!audioBlob) {
-        alert("No recorded audio available to submit.");
+        let chunks = [];
+        mediaRecorder.ondataavailable = event => chunks.push(event.data);
+        mediaRecorder.onstop = () => {
+            audioBlob = new Blob(chunks, { type: "audio/webm" });
+            enableSubmitButton();
+        };
+    } else {
+        // Stop recording
+        mediaRecorder.stop();
+        recordButton.textContent = "Start Speaking";
+        recordButton.classList.remove("recording");
+    }
+});
+
+/* Submit Audio File */
+submitButton.addEventListener("click", async () => {
+    if (!submitButton.classList.contains("enabled")) return;
+
+    const formData = new FormData();
+    if (audioUpload.files.length > 0) {
+        formData.append("audio", audioUpload.files[0]);
+    } else if (audioBlob) {
+        formData.append("audio", audioBlob, "recording.webm");
+    } else {
+        alert("No audio available.");
         return;
     }
 
-    const formData = new FormData();
-    formData.append("audio", audioBlob, "recording.webm");
+    submitButton.textContent = "Submitting...";
+    submitButton.disabled = true;
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     try {
-        console.log('fetching function')
         const response = await fetch("/process-audio/", {
             method: "POST",
             body: formData,
-            headers: {
-                "X-CSRFToken": csrfToken,
-            },
+            headers: { "X-CSRFToken": csrfToken },
         });
 
         if (response.ok) {
-            console.log('response has arrived here')
             const result = await response.json();
-            console.log(result)
-            document.getElementById('transcriptionResult').textContent = result.transcription;
+            document.getElementById("recordingStatus").textContent = "Transcription: " + result.transcription;
         } else {
-            console.error("Server error:", response.status);
-            document.getElementById("recordingStatus").textContent = "Error occurred during transcription.";
+            alert("Error processing audio.");
         }
     } catch (error) {
         console.error("Error:", error);
-        document.getElementById("recordingStatus").textContent = "Failed to process audio.";
+    } finally {
+        submitButton.textContent = "Submit Audio";
+        disableSubmitButton();
     }
 });
