@@ -1,0 +1,44 @@
+<section class="section-container">
+  <div class="card audio-interaction">
+    <h2>Speak or Upload Audio</h2>
+
+    <!-- .......Speak Section........................................ -->
+    <div class="speak-section">
+      <button class="speak-button" id="recordButton">
+        <div class="icon-container">
+          <i class="fas fa-microphone" id="microphoneIcon"></i>
+        </div>
+        <span id="buttonLabel">Start Speaking</span>
+      </button>
+      <p id="recordingStatus">Press the button to start speaking...</p>
+
+      <!-- Audio Sample After Recording shown here -->
+      <audio id="audioPlayback" controls hidden></audio>
+
+      <!-- Submit Audio Button-->
+      <button id="downloadButton" hidden>Submit audio</button>
+    </div>
+
+    <!-- ...... Divider.............................................. -->
+    <hr class="divider" />
+
+    <!-- .......Upload Section.......................................... -->
+    <div class="upload-section">
+      <h4>Or Upload an Audio File</h4>
+      <label for="audioUpload" class="audio-upload-label">
+        Choose Audio File:
+      </label>
+      <!-- audio file input -->
+      <form
+        id="audioForm"
+        action="{% url 'process_audio'%}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <input type="file" name="audio" accept="audio/*" />
+        <button type="submit">Submit Audio</button>
+      </form>
+    </div>
+  </div>
+</section>
