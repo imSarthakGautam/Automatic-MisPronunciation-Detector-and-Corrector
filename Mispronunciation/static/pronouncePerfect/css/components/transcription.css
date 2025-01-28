@@ -1,0 +1,60 @@
+/* Center the transcription section */
+.transcription-container {
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  text-align: center;
+  display: none;
+  position: relative;
+}
+
+/* Adjust the header with buttons */
+.transcription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+/* Style the action buttons */
+.transcription-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.transcription-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.transcription-actions button:hover {
+  transform: scale(1.2);
+}
+
+/* Ensure transcription text is readable */
+.transcription-content {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  word-wrap: break-word;
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Editable Content */
+.transcription-content[contenteditable="true"] {
+  border: 2px solid #4caf50;
+}

@@ -1,16 +1,7 @@
-
-{% extends "index.html" %}
-{% load static %}
-
-{% block title %}
-Pronounce Perfect 
-{% endblock title %}
-
-{% block content %}
-  <main>
-
-    
-    {% include "pronouncePerfect/components/speak_or_upload_audio.html" %}
-
-  </main>
+{% extends "index.html" %} {% load static %} {% block title %} Pronounce Perfect
+{% endblock title %} {% block content %}
+<main>
+  {% include "pronouncePerfect/components/speak_or_upload_audio.html" %} 
+  {% include "pronouncePerfect/components/transcription.html" %}
+</main>
 {% endblock content %}

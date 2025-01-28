@@ -1,86 +1,93 @@
 /* Centering the container */
 .section-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Ensuring the card is centered */
 .audio-interaction {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 50%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 /* Make Speak & Upload Sections Side-by-Side */
 .audio-input-container {
-    display: flex;
-    justify-content: space-between; /* Places sections side-by-side */
-    align-items: center;
-    width: 100%;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between; /* Places sections side-by-side */
+  align-items: center;
+  width: 100%;
+  gap: 20px;
 }
 
 /* Adjusting width of each section */
-.speak-section, .upload-section {
-    flex: 1;
-    text-align: center;
-    min-width: 250px;
+.speak-section,
+.upload-section {
+  flex: 1;
+  text-align: center;
+  min-width: 250px;
 }
 
 /* Upload Section */
 .upload-section {
-    padding: 10px;
-    background: #f1f1f1;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Center Submit Button Below */
 #submitAudioButton {
-    margin-top: 20px;
-    padding: 12px 20px;
-    background-color: #d3d3d3; /* Disabled state */
-    color: #666;
-    border: none;
-    border-radius: 5px;
-    cursor: not-allowed;
-    font-weight: bold;
-    font-size: 16px;
-    width: 80%;
-    transition: all 0.3s ease;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #d3d3d3; /* Disabled state */
+  color: #666;
+  border: none;
+  border-radius: 5px;
+  cursor: not-allowed;
+  font-weight: bold;
+  font-size: 16px;
+  width: 80%;
+  transition: all 0.3s ease;
 }
 
 /* Enable Submit Button */
 #submitAudioButton.enabled {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
 }
 
 #submitAudioButton.enabled:hover {
-    background-color: #45a049;
+  background-color: #45a049;
+}
+
+/* Make the audio player smaller */
+#audioPlayback {
+  max-width: 250px; /* Reduce width */
 }
 
 /* Responsive: Stack Sections on Small Screens */
 @media (max-width: 768px) {
-    .audio-input-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .audio-input-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .speak-section, .upload-section {
-        width: 100%;
-    }
+  .speak-section,
+  .upload-section {
+    width: 100%;
+  }
 }
