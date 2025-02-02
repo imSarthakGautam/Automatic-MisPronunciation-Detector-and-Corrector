@@ -41,7 +41,11 @@ def convert_to_wav(input_path, output_path):
 
 # Django view to process uploaded audio
 def process_audio(request):
-    if request.method == "POST" and request.FILES.get("audio"):
+    if request.method == "POST":
+        print("FILES RECEIVED:", request.FILES)
+        if "audio" not in request.FILES:
+            return JsonResponse({"error": "No audio file received"}, status=400)
+            
         try:
             # Get uploaded audio file
             audio_file = request.FILES["audio"]

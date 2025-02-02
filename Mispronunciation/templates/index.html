@@ -23,12 +23,6 @@
       rel="stylesheet"
       href="{% static 'pronouncePerfect/css/main.css' %}"
     />
-    {% comment %}
-    <link
-      rel="stylesheet"
-      href="{% static 'pronouncePerfect/css/main.css' %}"
-    />
-    {% endcomment %}
   </head>
   <body>
     <header>
@@ -51,8 +45,9 @@
       </div>
     </header>
     {% block content %} Content Here {% endblock %}
-    <script src="{% static 'pronouncePerfect/js/audio_submit.js' %}"></script>
-    <script src="{% static 'pronouncePerfect/js/recording.js' %}"></script>
-    <script src="{% static 'pronouncePerfect/js/script.js' %}"></script>
+    <script
+      type="module"
+      src="{% static 'pronouncePerfect/js/app.js' %}"
+    ></script>
   </body>
 </html>
