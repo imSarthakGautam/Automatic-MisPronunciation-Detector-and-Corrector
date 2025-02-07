@@ -1,8 +1,7 @@
-<section class="section-container" data-task="audio-only">
-  <div class="card audio-interaction">
-    <h2>Speak or Upload Audio</h2>
+<section class="section-container" data-task="audio-text">
+  <div class="card text-interaction">
+    <h2>Speak or Type Your Text</h2>
 
-    <!-- Speak & Upload Sections in a Row -->
     <div class="audio-input-container">
       <!-- Speak Section -->
       <div class="speak-section">
@@ -16,18 +15,17 @@
 
         <audio id="audioPlayback" controls hidden></audio>
       </div>
-
-      <!-- Upload Section -->
-      <div class="upload-section">
-        <h4>Or Upload an Audio File</h4>
-        <form id="audioForm" enctype="multipart/form-data">
-          {% csrf_token %}
-          <input type="file" name="audio" id="audioUpload" accept="audio/*" />
-        </form>
+      <div class="text-section">
+        <textarea
+          id="textInputForm"
+          placeholder="Type here or start speaking..."
+          rows="6"
+          oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
+        ></textarea>
       </div>
     </div>
 
     <!-- Unified Submit Button -->
-    <button id="submitAudioButton" disabled>Submit Audio</button>
+    <button id="submitAudioButton" disabled>Submit</button>
   </div>
 </section>

@@ -1,15 +1,15 @@
 /* Button States */
 .speak-button {
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .speak-button.recording {
-    background-color: red !important;
+  background-color: red !important;
 }

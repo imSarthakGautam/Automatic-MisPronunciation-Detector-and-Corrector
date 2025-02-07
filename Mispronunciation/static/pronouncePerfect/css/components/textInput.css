@@ -1,0 +1,45 @@
+/* Text Input Section */
+.text-section {
+  flex: 1; /* Ensures equal space */
+  text-align: center;
+  min-width: 300px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Text Input Field */
+.text-section textarea {
+  width: 97%; /* Full width to align with Speak button */
+  max-width: 450px;
+  min-height: 80px;
+  max-height: 200px; /* Restrict height */
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  overflow-y: auto;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus State */
+.text-section textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Make both sections the same height */
+@media (min-width: 768px) {
+  .audio-input-container {
+    display: flex;
+    align-items: stretch; /* Ensure both sections stretch equally */
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+  }
+}

@@ -4,3 +4,4 @@ audio_files/
 audio/
 model.safetensors
 media/
+packages/
