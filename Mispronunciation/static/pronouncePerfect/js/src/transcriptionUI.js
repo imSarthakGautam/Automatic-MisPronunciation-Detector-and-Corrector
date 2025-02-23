@@ -25,20 +25,18 @@ export class TranscriptionUI {
     this.editButton.addEventListener("click", () => this.toggleEdit());
     this.removeButton.addEventListener("click", () => this.removeText());
   }
-  
+
   showTranscription(text) {
-    this.transcriptionSection.hidden = false;  // Make sure section is visible
-    this.transcriptionSection.style.display = "block";  // or remove 'hidden' attribute
-    this.transcriptionText.textContent = text;
+    this.transcriptionSection.hidden = false; // Make sure section is visible
+    this.transcriptionSection.style.display = "block"; // or remove 'hidden' attribute
+    this.transcriptionText.innerHTML = text;
   }
-  
 
   copyText() {
-    navigator.clipboard
-      .writeText(this.transcriptionText.textContent)
-      .then(() => {
-        alert("Copied to clipboard!");
-      });
+    const plainText = this.transcriptionText.innerText; // Extract text without formatting
+    navigator.clipboard.writeText(plainText).then(() => {
+      alert("Copied to clipboard!");
+    });
   }
 
   toggleEdit() {
@@ -49,11 +47,12 @@ export class TranscriptionUI {
       this.transcriptionText.contentEditable = "true";
       this.transcriptionText.focus();
       this.editButton.textContent = "Copy";
+      this.transcriptionText.innerHTML = this.transcriptionText.innerText;
     }
   }
 
   removeText() {
-    this.transcriptionText.textContent = "Your transcription will appear here.";
+    this.transcriptionText.innerHTML = "Your transcription will appear here.";
     this.transcriptionSection.style.display = "none";
   }
 }

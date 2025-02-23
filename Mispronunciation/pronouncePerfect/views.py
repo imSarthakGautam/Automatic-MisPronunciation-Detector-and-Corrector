@@ -59,8 +59,13 @@ def process_audio_text(request):
 
         try:
             # Get uploaded audio file & user-provided text
-            audio_file = request.FILES["audio"]
-            text_input = request.POST["text"].strip()
+            audio_file = request.FILES.get("audio")
+            #["audio"]
+            text_input = request.POST.get("text"," ").strip()
+            #["text"].strip()
+
+            if not audio_file or not text_input:
+                return JsonResponse({"error": "Missing audio file or text input"}, status=400)
 
             # Process audio (converts if needed, transcribes)
             transcription = process_audio_file(audio_file)
@@ -70,7 +75,7 @@ def process_audio_text(request):
 
             return JsonResponse({
                 "transcription": transcription,
-                "comparison": comparison_result
+                "result": comparison_result
             })
 
         except Exception as e:

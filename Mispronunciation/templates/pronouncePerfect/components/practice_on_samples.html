@@ -1,0 +1,46 @@
+<section class="section-container" data-task="audio-practice">
+    <div class="card text-interaction">
+      <h2>Practice with Audio & Text</h2>
+  
+      <div class="sample-selection">
+        <h4>Select a Sample to Practice</h4>
+        <select id="sampleSelector">
+          <option value="sample1">"The quick brown fox jumps over the lazy dog."</option>
+          <option value="sample2">"She sells seashells by the seashore."</option>
+          <option value="sample3">"Peter Piper picked a peck of pickled peppers."</option>
+        </select>
+      </div>
+  
+      <div class="audio-input-container">
+        <!-- Speak Section -->
+        <div class="speak-section">
+          <button class="speak-button" id="recordButton">
+            <div class="icon-container">
+              <i class="fas fa-microphone" id="microphoneIcon"></i>
+            </div>
+            <span id="buttonLabel">Start Speaking</span>
+            <p id="recordingStatus">Press to start speaking...</p>
+          </button>
+          <audio id="audioPlayback" controls hidden></audio>
+        </div>
+        
+        <div class="text-section">
+          <textarea
+            id="textInputForm"
+            rows="6"
+            disabled
+            oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
+          >"The quick brown fox jumps over the lazy dog."</textarea>
+        </div>
+      </div>
+  
+      <button id="submitAudioButton" disabled>Submit</button>
+    </div>
+</section>
+
+<script>
+  document.getElementById("sampleSelector").addEventListener("change", function() {
+    const selectedText = this.options[this.selectedIndex].text;
+    document.getElementById("textInputForm").value = selectedText;
+  });
+</script>

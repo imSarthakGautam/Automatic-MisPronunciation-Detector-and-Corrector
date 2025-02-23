@@ -24,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     new AudioTextApp(audioTextSection);
   }
 
+  // Handle audio practice section
+  const audioPracticeSection = document.querySelector('[data-task="audio-practice"]');
+  if (audioPracticeSection){
+    new AudioPracticeApp(audioPracticeSection);
+  }
+
   console.log("App initialized");
 });
 
@@ -71,11 +77,26 @@ class AudioTextApp {
     );
 
     this.submitter = new AudioTextSubmitter(
-      "audioUpload",
       "submitAudioButton",
       "textInput",
       "/process-audio-text/",
       this.transcriptionUI
     );
   }
+}
+
+class AudioPracticeApp {
+  constructor(){
+    const recorder = new AudioRecorder(
+      "recordButton",
+      "audioPlayback",
+      "submitAudioButton"
+    );
+
+    const submitter = new AudioSubmitter(
+      //
+    )
+
+  }
+
 }

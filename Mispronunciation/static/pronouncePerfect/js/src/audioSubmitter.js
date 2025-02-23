@@ -28,22 +28,24 @@ export class AudioSubmitter {
     this.submitButton.addEventListener("click", () => this.submitAudio());
   }
 
+  // whenever <input> is changed: Note this is not changed in audioRecord: hence this is a reusuable Class
   handleFileUpload() {
     console.log("inside file upload");
 
     const audioPlayback = document.getElementById("audioPlayback");
     if (!audioPlayback) {
-      console.error("❌ Error: audioPlayback element not found in the DOM.");
+      console.error("Error::: audioPlayback element not found in the DOM.");
       return;
     }
 
+    // stop existing recordings.
     const recorderInstance = window.audioRecorderInstance;
     if (recorderInstance?.mediaRecorder?.state === "recording") {
       recorderInstance.mediaRecorder.stop();
     }
 
     // Debug File Selection
-    console.log("🧐 Checking file selection...");
+    console.log("Checking file selection...");
     console.log("audioUpload.files:", this.audioUpload.files);
     console.log("audioUpload.files.length:", this.audioUpload.files.length);
 
@@ -76,6 +78,7 @@ export class AudioSubmitter {
       return;
     }
     console.log("Using audio file:", audioFile, "recording.webm");
+    // appends audioFile with key audio in formdata
     formData.append("audio", audioFile);
 
     // changes in UI elements
@@ -123,3 +126,17 @@ export class AudioSubmitter {
     return document.querySelector("[name=csrfmiddlewaretoken]").value;
   }
 }
+
+/**
+ * @notes : .files in <input> element 
+ * specific to <input type="file">
+ * returns array FileList object that contains one or more files selected by user
+ 
+ * console.log(fileInput.files);  // Logs FileList object : 
+  @logs : FileList { 0: File, length: 1 }
+ * console.log(typeof fileInput.files); // "object"
+  @logs : "object"
+ * You can access files using fileInput.files[0], similar to an array.
+ 
+ * other things that can be attached : .change .input .focus .blur
+ */
