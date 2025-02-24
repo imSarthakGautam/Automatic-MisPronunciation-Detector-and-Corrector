@@ -2,11 +2,13 @@ import os
 import librosa
 import torch
 import soundfile as sf
+import logging
 from django.conf import settings
 from pydub import AudioSegment
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 from django.http import JsonResponse
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 # Load ASR model & processor globally
 MODEL_PATH = settings.MODEL_DIR
 processor = Wav2Vec2Processor.from_pretrained(MODEL_PATH)
@@ -43,10 +45,11 @@ def save_audio_file(audio_file):
 
 # ------ Convert audio to WAV and resample to 16 kHz
 def convert_to_wav(input_path):
-    output_path = input_path.replace(".mp3", ".wav").replace(".m4a", ".wav")
+    output_path = input_path.replace(".webm", ".wav").replace(".mp3", ".wav").replace(".m4a", ".wav")
     try:  
         print(f"Converting {input_path} to WAV format...")
-        audio = AudioSegment.from_file(input_path)
+        audio = AudioSegment.from_file(input_path, format="webm")
+        logger.info(f"Audio loaded successfully: {audio.frame_rate} Hz, {audio.channels} channels")
         audio = audio.set_frame_rate(16000)
         audio.export(output_path, format="wav")
         return output_path
