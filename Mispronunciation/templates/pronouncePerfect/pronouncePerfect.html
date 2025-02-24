@@ -1,9 +1,10 @@
 {% extends "index.html" %} {% load static %} {% block title %} Pronounce Perfect
 {% endblock title %} {% block content %}
 <main>
-  {% comment %} {% include "pronouncePerfect/components/speak_or_upload_audio.html" %} 
-  {% include "pronouncePerfect/components/transcription.html" %} 
-  {% include "pronouncePerfect/components/text_input_component.html" %} {% endcomment %}
-  {% include "pronouncePerfect/components/practice_on_samples.html" %}
+  {% comment %} {% include "pronouncePerfect/components/speak_or_upload_audio.html" %} {% endcomment %}
+  {% include "pronouncePerfect/components/text_input_component.html" %} 
+  {% include "pronouncePerfect/components/transcription.html" %}  
+ 
+  {% comment %} {% include "pronouncePerfect/components/practice_on_samples.html" %} {% endcomment %}
 </main>
 {% endblock content %}

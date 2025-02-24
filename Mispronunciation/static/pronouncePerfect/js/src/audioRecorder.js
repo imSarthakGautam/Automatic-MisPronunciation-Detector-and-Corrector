@@ -67,7 +67,7 @@ export class AudioRecorder {
         console.log("Recording stopped...");
         this.audioBlob = new Blob(chunks, { type: "audio/webm" });
 
-        console.log("Generated audioBlob:", this.audioBlob);
+        console.log("Generated audioBlob:", this.audioBlob, this.audioBlob.size, this.audioBlob.type);
         if (!this.audioBlob) {
           console.error("Audio blob is undefined!");
         }

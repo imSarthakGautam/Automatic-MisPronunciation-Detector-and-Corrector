@@ -5,7 +5,7 @@ from pronouncePerfect.services import process_audio_file, compare_texts
 
 import os
 import librosa
-import soundfile as sf
+# import soundfile as sf
 
 from pydub import AudioSegment
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor

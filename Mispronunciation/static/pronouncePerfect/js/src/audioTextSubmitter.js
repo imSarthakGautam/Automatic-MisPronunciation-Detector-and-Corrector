@@ -16,13 +16,14 @@ export class AudioTextSubmitter {
     this.apiUrl = apiUrl;
     this.textInput = document.getElementById(textInputId);
     this.transcriptionUI = transcriptionUI;
+    console.log('inside submit-audio-text class')
 
     if (
       //   !this.audioUpload||
       !this.submitButton ||
-      this.textInput
+      !this.textInput
     ) {
-      console.error("Error: Required DOM elements for submission not found.");
+      console.error("Error: Required DOM elements for audioText submission not found.");
       return;
     }
 
