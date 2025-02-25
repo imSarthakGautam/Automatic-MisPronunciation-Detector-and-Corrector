@@ -1,0 +1,23 @@
+__pycache__/*
+Mispronunciation/pronouncePerfect/__pycache__/*
+Mispronunciation/pronouncePerfect_pycache__/*
+.venv/
+audio_files/
+audio/
+model.safetensors
+media/*
+packages/
+Notes/
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+Mispronunciation/pronouncePerfect/__pycache__/*
+Mispronunciation/pronouncePerfect/media/*
+
+# Common additions
+.DS_Store
+*.log
+*.swp
+*.sqlite
+*.env
