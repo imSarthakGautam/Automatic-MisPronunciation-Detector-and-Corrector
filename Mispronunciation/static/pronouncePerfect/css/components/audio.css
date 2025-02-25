@@ -52,6 +52,7 @@
   align-items: center;
 }
 
+/* Text Section (added for consistency with other components) */
 .text-section {
   flex: 1;
   text-align: center;
@@ -63,13 +64,13 @@
   flex-direction: column;
   align-items: center;
 }
-
-
-/* Center Submit Button Below */
-#submitAudioButton {
+/* Shared Submit Button Styling (using IDs for each button) */
+#submitAudioOnlyButton,
+#submitAudioTextButton,
+#practiceSubmitButton {
   margin-top: 20px;
   padding: 12px 20px;
-  background-color: #d3d3d3; /* Disabled state */
+  background-color: #d3d3d3; /* Disabled state (gray) */
   color: #666;
   border: none;
   border-radius: 5px;
@@ -80,31 +81,16 @@
   transition: all 0.3s ease;
 }
 
-/* Enable Submit Button */
-#submitAudioButton.enabled {
-  background-color: #4caf50;
+#submitAudioOnlyButton.enabled,
+#submitAudioTextButton.enabled,
+#practiceSubmitButton.enabled {
+  background-color: #4caf50; /* Enabled state (green) */
   color: white;
   cursor: pointer;
 }
 
-#submitAudioButton.enabled:hover {
-  background-color: #45a049;
-}
-
-/* Make the audio player smaller */
-#audioPlayback {
-  max-width: 250px; /* Reduce width */
-}
-
-/* Responsive: Stack Sections on Small Screens */
-@media (max-width: 768px) {
-  .audio-input-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .speak-section,
-  .upload-section {
-    width: 100%;
-  }
+#submitAudioOnlyButton.enabled:hover,
+#submitAudioTextButton.enabled:hover,
+#practiceSubmitButton.enabled:hover {
+  background-color: #45a049; /* Hover state (darker green) */
 }

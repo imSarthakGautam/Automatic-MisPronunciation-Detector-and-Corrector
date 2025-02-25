@@ -1,46 +1,81 @@
-<section class="section-container" data-task="audio-practice">
-    <div class="card text-interaction">
-      <h2>Practice with Audio & Text</h2>
-  
-      <div class="sample-selection">
-        <h4>Select a Sample to Practice</h4>
-        <select id="sampleSelector">
-          <option value="sample1">"The quick brown fox jumps over the lazy dog."</option>
-          <option value="sample2">"She sells seashells by the seashore."</option>
-          <option value="sample3">"Peter Piper picked a peck of pickled peppers."</option>
-        </select>
-      </div>
-  
-      <div class="audio-input-container">
-        <!-- Speak Section -->
-        <div class="speak-section">
-          <button class="speak-button" id="recordButton">
-            <div class="icon-container">
-              <i class="fas fa-microphone" id="microphoneIcon"></i>
-            </div>
-            <span id="buttonLabel">Start Speaking</span>
-            <p id="recordingStatus">Press to start speaking...</p>
-          </button>
-          <audio id="audioPlayback" controls hidden></audio>
-        </div>
-        
-        <div class="text-section">
-          <textarea
-            id="textInputForm"
-            rows="6"
-            disabled
-            oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
-          >"The quick brown fox jumps over the lazy dog."</textarea>
-        </div>
-      </div>
-  
-      <button id="submitAudioButton" disabled>Submit</button>
-    </div>
-</section>
+{% load static %}
 
-<script>
-  document.getElementById("sampleSelector").addEventListener("change", function() {
-    const selectedText = this.options[this.selectedIndex].text;
-    document.getElementById("textInputForm").value = selectedText;
-  });
-</script>
+<section
+  class="section-container"
+  data-task="audio-practice"
+  aria-label="Practice with Audio and Text"
+>
+  <div class="card practice-interaction">
+    <h2 class="card-title">Practice with Audio & Text</h2>
+
+    <!-- Sample Selection -->
+    <div
+      class="sample-selection"
+      role="group"
+      aria-labelledby="sampleSelectionLabel"
+    >
+      <h4 id="sampleSelectionLabel" class="sample-selection-title">
+        Select a Sample to Practice
+      </h4>
+      <select
+        id="practiceSampleSelector"
+        class="sample-selector"
+        aria-describedby="sampleSelectionDesc"
+      >
+        <option value="" disabled selected>Select a sample...</option>
+      </select>
+    </div>
+
+    <!-- Audio and Text Input Container -->
+    <div class="audio-input-container">
+      <!-- Speak Section -->
+      <div
+        class="speak-section"
+        role="region"
+        aria-label="Audio Recording Controls"
+      >
+        <button
+          class="speak-button"
+          id="practiceRecordButton"
+          aria-label="Start or stop recording"
+          aria-pressed="false"
+        >
+          <div class="icon-container">
+            <i class="fas fa-microphone" id="practiceMicrophoneIcon"></i>
+          </div>
+          <span id="practiceButtonLabel">Start Speaking</span>
+          <p id="practiceRecordingStatus" class="recording-status">
+            Press to start speaking...
+          </p>
+        </button>
+        <audio
+          id="practiceAudioPlayback"
+          controls
+          hidden
+          aria-label="Playback of recorded audio"
+        ></audio>
+      </div>
+
+      <!-- Text Display (Read-Only) -->
+      <div class="text-section" role="region" aria-label="Selected Text Sample">
+        <label for="practiceTextInput" class="visually-hidden"
+          >Selected Text Sample</label
+        >
+        <textarea
+          id="practiceTextInput"
+          class="practice-text-input"
+          rows="6"
+          disabled
+          readonly
+          aria-readonly="true"
+          oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
+        >
+        Select a sample to see the full text</textarea
+        >
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <button id="practiceSubmitButton" disabled>Submit</button> <!-- Removed classes -->
+    {% include "pronouncePerfect/components/transcription.html" with prefix="practice" %}
+  </div>
+</section>

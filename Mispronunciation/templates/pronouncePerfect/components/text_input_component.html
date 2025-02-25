@@ -1,3 +1,5 @@
+{% load static %}
+
 <section class="section-container" data-task="audio-text">
   <div class="card text-interaction">
     <h2>Speak or Type Your Text</h2>
@@ -26,7 +28,7 @@
     </div>
 
     <!-- Unified Submit Button -->
-    <button id="submitAudioButton" disabled>Submit</button>
-    
+    <button id="submitAudioTextButton" disabled>Submit</button> <!-- Removed classes -->
+    {% include "pronouncePerfect/components/transcription.html" with prefix="audioText" %}
   </div>
 </section>

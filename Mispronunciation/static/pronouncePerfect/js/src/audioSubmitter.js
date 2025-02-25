@@ -9,9 +9,16 @@ export class AudioSubmitter {
    * @apiUrl : apiEndpoint to hit /process-audio
    * @transcriptionUI : instance of Transcription class
    */
-  constructor(audioUploadId, submitButtonId, apiUrl, transcriptionUI) {
-    this.audioUpload = document.getElementById(audioUploadId);
-    this.submitButton = document.getElementById(submitButtonId);
+  constructor(
+    audioUploadId,
+    submitButtonId,
+    apiUrl,
+    transcriptionUI,
+    parentElement = document
+  ) {
+    this.parentElement = parentElement;
+    this.audioUpload = parentElement.querySelector(`#${audioUploadId}`);
+    this.submitButton = parentElement.querySelector(`#${submitButtonId}`);
     this.apiUrl = apiUrl;
     this.transcriptionUI = transcriptionUI;
 
@@ -32,7 +39,7 @@ export class AudioSubmitter {
   handleFileUpload() {
     console.log("inside file upload");
 
-    const audioPlayback = document.getElementById("audioPlayback");
+    const audioPlayback = this.parentElement.getElementById("audioPlayback");
     if (!audioPlayback) {
       console.error("Error::: audioPlayback element not found in the DOM.");
       return;
@@ -123,7 +130,7 @@ export class AudioSubmitter {
   }
 
   getCSRFToken() {
-    return document.querySelector("[name=csrfmiddlewaretoken]").value;
+    return this.parentElement.querySelector("[name=csrfmiddlewaretoken]").value;
   }
 }
 

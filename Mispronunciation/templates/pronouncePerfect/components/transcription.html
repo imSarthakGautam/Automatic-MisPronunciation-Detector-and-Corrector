@@ -1,13 +1,42 @@
-<section id="transcriptionSection" class="transcription-container" hidden>
+{% load static %}
+
+<section
+  id="{{ prefix }}TranscriptionSection"
+  class="transcription-container"
+  hidden
+  role="region"
+  aria-label="{{ prefix|title }} Transcription Results"
+>
   <div class="transcription-header">
-    <h3>Transcription Result</h3>
+    <h3>{{ prefix|title }} Transcription Result</h3>
     <div class="transcription-actions">
-      <button id="copyTranscription" title="Copy to Clipboard">[Copy]</button>
-      <button id="editTranscription" title="Edit">[Edit]</button>
-      <button id="removeTranscription" title="Delete">[Remove]</button>
+      <button
+        id="{{ prefix }}CopyTranscription"
+        class="transcription-action"
+        title="Copy to Clipboard"
+        aria-label="Copy {{ prefix|lower }} transcription"
+      >
+        [Copy]
+      </button>
+      <button
+        id="{{ prefix }}EditTranscription"
+        class="transcription-action"
+        title="Edit"
+        aria-label="Edit {{ prefix|lower }} transcription"
+      >
+        [Edit]
+      </button>
+      <button
+        id="{{ prefix }}RemoveTranscription"
+        class="transcription-action"
+        title="Delete"
+        aria-label="Remove {{ prefix|lower }} transcription"
+      >
+        [Remove]
+      </button>
     </div>
   </div>
-  <div id="transcriptionText" class="transcription-content">
-    Your transcription will appear here.
+  <div id="{{ prefix }}TranscriptionText" class="transcription-content">
+    Your {{ prefix|lower }} transcription will appear here.
   </div>
 </section>

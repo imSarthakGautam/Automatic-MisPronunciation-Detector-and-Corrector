@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
 from pronouncePerfect.services import process_audio_file, compare_texts
-
+from django.views.decorators.csrf import csrf_exempt
+from pronouncePerfect.models import PracticeSample
 import os
 import librosa
 # import soundfile as sf
@@ -82,4 +83,11 @@ def process_audio_text(request):
             print(f"Error in process_audio view: {e}")
             return JsonResponse({"error": str(e)}, status=500)
 
+    return JsonResponse({"error": "Invalid request method"}, status=400)
+
+@csrf_exempt
+def get_practice_samples(request):
+    if request.method == "GET":
+        samples = PracticeSample.objects.all().values("id", "text", "title")
+        return JsonResponse(list(samples), safe=False)
     return JsonResponse({"error": "Invalid request method"}, status=400)

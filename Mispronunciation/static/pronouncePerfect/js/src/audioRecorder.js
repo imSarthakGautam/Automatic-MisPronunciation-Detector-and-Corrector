@@ -5,7 +5,12 @@ export class AudioRecorder {
    * Constructor initializes the DOM Elements recordButtton, AudioPlayback and SubmitButton
    * It returns if it doesnt find respective DOM Element
    */
-  constructor(recordButtonId, playbackId, submitButtonId) {
+  constructor(
+    recordButtonId,
+    audioPlaybackId,
+    submitButtonId,
+    parentElement = document
+  ) {
     /**
      * @mediaRecorder
      *  built-in browser, WebAPI to record media (audio/video)
@@ -20,10 +25,12 @@ export class AudioRecorder {
      */
     this.mediaRecorder = null;
     this.audioBlob = null;
-
-    this.recordButton = document.getElementById(recordButtonId);
-    this.audioPlayback = document.getElementById(playbackId);
-    this.submitButton = document.getElementById(submitButtonId);
+    this.parentElement = parentElement;
+    this.recordButton = parentElement.querySelector(`#${recordButtonId}`);
+    this.audioPlayback =
+      this.parentElement.querySelector(`#${audioPlaybackId}`) ||
+      document.getElementById(audioPlaybackId);
+    this.submitButton = parentElement.querySelector(`#${submitButtonId}`);
 
     if (!this.recordButton || !this.audioPlayback || !this.submitButton) {
       console.error("Error: Required DOM elements for recording not found.");
@@ -67,7 +74,12 @@ export class AudioRecorder {
         console.log("Recording stopped...");
         this.audioBlob = new Blob(chunks, { type: "audio/webm" });
 
-        console.log("Generated audioBlob:", this.audioBlob, this.audioBlob.size, this.audioBlob.type);
+        console.log(
+          "Generated audioBlob:",
+          this.audioBlob,
+          this.audioBlob.size,
+          this.audioBlob.type
+        );
         if (!this.audioBlob) {
           console.error("Audio blob is undefined!");
         }
