@@ -2,132 +2,198 @@
 
 ## Overview
 
-PronouncePerfect is a web application designed to help users improve their pronunciation by recording audio, submitting text or audio inputs, and receiving transcriptions and comparisons against expected text. 
+PronouncePerfect is a web application designed to help users improve their pronunciation by recording audio, submitting text or audio inputs, and receiving transcriptions with pronunciation feedback.
 
-Built using **Django** for the backend and **vanilla JavaScript** for the frontend, it features three main components:
+![pronouncePerfect.AI](./pronouncePerfectAI.png)
 
-- **Audio Only:** Record or upload audio for transcription.
-- **Audio + Text:** Record audio and provide text for comparison with transcriptions.
-- **Audio Practice:** Practice with pre-selected text samples, record audio, and compare transcriptions.
+The application is built with:
 
-The application leverages **HTML5, CSS, and JavaScript** for dynamic functionality, including audio recording, submission, and transcription feedback.
+- **Backend**: Django + Django REST Framework (DRF)
+- **Frontend**: React + Tailwind CSS
+- **Audio Processing**: `ffmpeg` & `pydub`
+- **Models**: Trained on `wav2vec2.0` and `whisper`.
+- **Language Support** : `Nepali` and `English`
 
-## Features
+### **Key Features**
 
-- **Audio Recording:** Record audio directly in the browser using the microphone.
-- **Audio Upload:** Upload audio files for processing.
-- **Text Input:** Enter or select text for comparison with audio transcriptions.
-- **Transcription Feedback:** Display transcriptions with color-coded comparisons (green for correct, red for incorrect).
-- **Practice Mode:** Select from database-driven text samples to practice pronunciation.
+- **Audio Recording** – Record via microphone using the **MediaRecorder API**
+- **Audio Upload** – Drag-and-drop pre-recorded files with a preview
+- **Text Input & Pronunciation Check** – Compare audio transcriptions with user-provided text
+- **Practice Mode** – Select database-driven text samples and receive feedback
+- **Color-coded Transcriptions** – Green (correct), Red (incorrect)
+- **Collapsible Sidebar & Responsive UI** – Mobile-friendly with intuitive navigation
 - **Interactive UI:** Buttons for copying, editing, and removing transcriptions, with real-time state management.
+- **Accessibility** – ARIA labels, keyboard navigation, WCAG 2.1 contrast compliance
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
 - **Python 3.8+**
-- **Node.js 14+** (if managing JavaScript dependencies)
+- **Node.js 18+** (for React & Tailwind)
 - **pip** (Python package manager)
 - **virtualenv** (optional, for Python environment isolation)
-- **Git** (for cloning the repository)
+- **Git** (for repository management and version control)
 - **ffmpeg** (required for audio processing)
 
-## Installation
+## **Installation**
 
-Follow these steps to set up and run **PronouncePerfect** locally:
-
-### 1. Clone the Repository
+### **1. Clone the Repository**
 
 ```bash
 git clone https://github.com/your-username/pronouncePerfect.git
 cd pronouncePerfect
 ```
 
-### 2. Set Up Python Virtual Environment
+### **2. Backend Setup (Django)**
 
-Create and activate a virtual environment:
+#### **Create Virtual Environment**
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
 ```
 
-### 3. Install Python Dependencies
+#### **Install Dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If `requirements.txt` doesn’t exist, create it with:
+> If `requirements.txt` is missing, generate it:
 
 ```bash
 pip freeze > requirements.txt
 ```
 
-Ensure it includes **Django, pydub**, and other dependencies.
+### **3. Frontend Setup (React + Tailwind CSS)**
 
-### 4. Install JavaScript Dependencies (Optional)
-
-If additional JavaScript dependencies are needed, install them via npm:
+#### **Navigate to Frontend Directory**
 
 ```bash
-npm init -y
-npm install --save-dev <package-name>
+cd frontend
 ```
 
-### 5. Install ffmpeg (for Audio Processing)
+#### **Install Dependencies**
 
-#### On Ubuntu/Debian:
+```bash
+npm install
+```
+
+#### **Initialize Vite for React**
+
+```bash
+npm create vite@latest . -- --template react
+```
+
+#### **Install Tailwind CSS**
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+#### **Configure Tailwind** (`tailwind.config.js`)
+
+```javascript
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        "pronounce-teal": "#2DD4BF",
+        "pronounce-blue": "#2563EB",
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+#### **Update Global Styles** (`index.css`)
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### **4. Install `ffmpeg` (Audio Processing)**
+
+#### **Ubuntu/Debian**
+
 ```bash
 sudo apt-get update
 sudo apt-get install ffmpeg
 ```
 
-#### On macOS:
+#### **macOS**
+
 ```bash
 brew install ffmpeg
 ```
 
-#### On Windows:
-Download and install `ffmpeg` from [ffmpeg.org](https://ffmpeg.org/) and add it to your system `PATH`.
+#### **Windows**
 
-### 6. Configure Django Settings
+Download **ffmpeg** from [ffmpeg.org](https://ffmpeg.org) and add it to your system PATH.
 
-Copy the sample settings file:
+### **5. Configure Django Settings**
 
 ```bash
 cp pronouncePerfect/settings/local.py.example pronouncePerfect/settings/local.py
 ```
 
-Update `local.py` with database credentials, secret key, and other settings.
+Edit `local.py` to configure:
 
-### 7. Apply Migrations
+- **Database credentials**
+- **Django secret key**
+- **CORS settings** (for React frontend)
+
+```python
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+```
+
+### **6. Apply Migrations**
 
 ```bash
 python manage.py migrate
 ```
 
-### 8. Create a Superuser (Optional)
+### **7. Create Superuser (Optional)**
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 9. Load Initial Data (Optional)
+### **8. Load Initial Data (Optional)**
 
 ```bash
 python manage.py loaddata initial_data.json
 ```
 
-### 10. Run the Development Server
+### **9. Run Backend & Frontend**
+
+#### **Backend (Django Server)**
 
 ```bash
+cd ..  # Back to project root
 python manage.py runserver
 ```
 
-Open your browser to **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** to access PronouncePerfect.
+> Open in browser: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## Usage
+#### **Frontend (React Dev Server)**
+
+```bash
+cd frontend
+npm run dev
+```
+
+> Open in browser: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## **Usage**
 
 ### Components
 
@@ -147,6 +213,8 @@ Open your browser to **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** to acc
 - **Disabled Buttons:** Verify unique button IDs in `app.js`.
 
 ## Project Structure
+
+### Backend
 
 ```
 pronouncePerfect/
@@ -180,17 +248,62 @@ pronouncePerfect/
 └── README.md
 ```
 
+### Frontend
+
+```
+pronouncePerfect/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── Layout.jsx
+│   │   │   ├── Main.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── AudioRecorder.jsx
+│   │   │   ├── AudioSubmitter.jsx
+│   │   │   ├── SubmitButton.jsx
+│   │   │   └── SubmitOrUploadAudio.jsx
+│   │   │   └── TranscriptionComponent.jsx
+│   │   ├── pages/
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── CheckPronunciationsPage.jsx
+│   │   │   └── PracticeOnSamplesPage.jsx
+│   │   ├── contexts/
+│   │   │   ├── AudioContext.jsx
+│   │   │   └── SidebarContext.jsx
+│   │   ├── utils/
+│   │   │   ├── css.js
+│   │   │   ├── App.jsx
+│   │   │   └── index.css
+│   │   └── main.jsx
+│   ├── public/
+│   │   └── index.html
+│   ├── package.json
+│   ├── tailwind.config.js
+│   └── postcss.config.js
+├── static/
+└── README.md
+```
+
+---
+
 ## Dependencies
 
 ### Python
+
 - **Django >= 4.0**
 - **pydub** (for audio processing)
 - **ffmpeg-python** (optional)
 
 ### JavaScript
-- Vanilla JavaScript, supports modern browsers.
+
+- Vanilla JavaScript [for React], supports modern browsers.
+
+### NodeJs
 
 ### System
+
 - **ffmpeg** (for audio processing)
 
 ## Contributing
@@ -231,12 +344,14 @@ Manually test UI components in the browser.
 ## Known Issues and Troubleshooting
 
 - **Audio Processing Errors (HTTP 500):** Ensure `ffmpeg` is installed and configured.
-- **Disabled Submit Buttons:** Check for unique button IDs in `app.js`.
-- **Transcription Not Displaying:** Verify correct template structure and script references.
+- **Transcription Errors** Check **server logs** for HTTP 500 errors or CORS issues
+- **React Not Loading Styles:** Ensure Tailwind is configured in `tailwind.config.js` & `index.css`
+- **Timer Not Updating:** Verify `useEffect` dependencies in `AudioRecorder.jsx`
 
 ## Browser Compatibility
 
 Ensure your browser supports:
+
 - **MediaRecorder API**
 - **navigator.clipboard**
 - **HTML5 Audio APIs**

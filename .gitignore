@@ -21,3 +21,8 @@ Mispronunciation/pronouncePerfect/media/*
 *.swp
 *.sqlite
 *.env
+
+
+
+media/
+__pycache__/
