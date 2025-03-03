@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  --color-fresh-primary: #73a1b2;
+  --color-fresh-primary: #588798;
+  --color-fresh-secondary: #73a1b2;
+  --color-fresh-background: #d0d5ce;
+  --color-fresh-cream: #fbfaf8;
+}
