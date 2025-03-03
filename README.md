@@ -7,7 +7,6 @@ PronouncePerfect is a web application designed to help users improve their pronu
 ![pronouncePerfect.AI](./pronouncePerfectAI.png)
 
 The application is built with:
-
 - **Backend**: Django + Django REST Framework (DRF)
 - **Frontend**: React + Tailwind CSS
 - **Audio Processing**: `ffmpeg` & `pydub`
