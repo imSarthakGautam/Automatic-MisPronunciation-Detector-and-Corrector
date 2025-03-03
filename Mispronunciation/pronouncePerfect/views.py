@@ -6,6 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from pronouncePerfect.models import PracticeSample
 import os
 import librosa
+
+import logging
+logger = logging.getLogger(__name__)
 # import soundfile as sf
 
 from pydub import AudioSegment
@@ -37,7 +40,7 @@ def process_audio(request):
         try:
             # Get uploaded audio file
             audio_file = request.FILES["audio"]
-            unique_name = f"temp_{audio_file.name}"
+            unique_name = f"temp_{audio_file.name}.wav" if audio_file.name else "temp_audio.wav"
             
             # process audio ( possible conversion + transcribes it)
             transcription = process_audio_file(audio_file)
@@ -85,9 +88,22 @@ def process_audio_text(request):
 
     return JsonResponse({"error": "Invalid request method"}, status=400)
 
+
 @csrf_exempt
 def get_practice_samples(request):
     if request.method == "GET":
         samples = PracticeSample.objects.all().values("id", "text", "title")
-        return JsonResponse(list(samples), safe=False)
+        samples_list = list(samples)
+        
+        # Log each sample and the final JSON response
+        for sample in samples_list:
+            logger.info(f"Sample: {sample}")
+        
+        logger.info(f"JSON response sent: {samples_list}")  # Log the entire response
+        
+        return JsonResponse({"samples": samples_list}, safe=False)
     return JsonResponse({"error": "Invalid request method"}, status=400)
+
+@csrf_exempt
+def csrf_token_view(request):
+     return JsonResponse({'status': 'success'})
