@@ -16,11 +16,6 @@ from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 import torch
 # import torchaudio
 
-# -----------Load the model and the processor--------
-MODEL_PATH = settings.MODEL_DIR
-processor = Wav2Vec2Processor.from_pretrained(MODEL_PATH) # Loads the processor from directory specified by MODEL_PATH,  it is needed because processor handles the preprocessing of audio input, ensures consistency with setup during fine tuning
-model = Wav2Vec2ForCTC.from_pretrained(MODEL_PATH) # loads the fine tuned wav2vec2 model [ reads config.json and model.safetensors to recreate the model with architecture and weights]
-
 # ------Render--------
 def pronouncePerfect(request):
     return render(request, 'pronouncePerfect/pronouncePerfect.html')
@@ -54,7 +49,6 @@ def process_audio(request):
         return JsonResponse({"error": "Invalid request. No audio file provided."}, status=400)
 
 # Django view to process audio and text
-
 def process_audio_text(request):
     if request.method == "POST":
         print("FILES RECEIVED:", request.FILES)
