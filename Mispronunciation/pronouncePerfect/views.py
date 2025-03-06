@@ -29,8 +29,12 @@ def audio_upload(request):
 def process_audio(request):
     if request.method == "POST":
         print("FILES RECEIVED:", request.FILES)
+        
         if "audio" not in request.FILES:
             return JsonResponse({"error": "No audio file received"}, status=400)
+        
+        language=request.POST.get("language")
+        print("Requested Language:", language )
             
         try:
             # Get uploaded audio file
@@ -38,7 +42,7 @@ def process_audio(request):
             unique_name = f"temp_{audio_file.name}.wav" if audio_file.name else "temp_audio.wav"
             
             # process audio ( possible conversion + transcribes it)
-            transcription = process_audio_file(audio_file)
+            transcription = process_audio_file(audio_file, language)
 
             return JsonResponse({"transcription": transcription})
         
@@ -55,6 +59,9 @@ def process_audio_text(request):
         if "audio" not in request.FILES or "text" not in request.POST:
             return JsonResponse({"error": "Missing audio file or text input"}, status=400)
 
+        language=request.POST.get("language")
+        print("Requested Language:", language )
+
         try:
             # Get uploaded audio file & user-provided text
             audio_file = request.FILES.get("audio")
@@ -66,7 +73,7 @@ def process_audio_text(request):
                 return JsonResponse({"error": "Missing audio file or text input"}, status=400)
 
             # Process audio (converts if needed, transcribes)
-            transcription = process_audio_file(audio_file)
+            transcription = process_audio_file(audio_file, language)
 
             # Compare transcribed text with user input
             comparison_result = compare_texts(transcription, text_input)
@@ -86,7 +93,14 @@ def process_audio_text(request):
 @csrf_exempt
 def get_practice_samples(request):
     if request.method == "GET":
-        samples = PracticeSample.objects.all().values("id", "text", "title")
+        language = request.GET.get("language") #Get language from query parameter.
+
+        if language:
+            samples = PracticeSample.objects.filter(language=language).values("id", "text", "title")
+            print('samples in language:', language, '--')
+        else:
+            samples = PracticeSample.objects.all().values("id", "text", "title") #if no language, return all.
+
         samples_list = list(samples)
         
         # Log each sample and the final JSON response

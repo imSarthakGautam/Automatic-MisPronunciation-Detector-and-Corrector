@@ -90,7 +90,9 @@ function CheckPronunciation() {
 
   return (
     <div className="max-w-2xl mx-auto p-4 bg-[#EFE9E1] rounded-lg shadow-[0_2px_8px_rgba(115,161,178,0.2)] space-y-4">
-      <h2 className="text-xl font-bold text-gray-800">Check Pronunciations</h2>
+      <h2 className="text-xl font-bold text-gray-800">
+        Input Text and Audio below:
+      </h2>
       <div className="space-y-4">
         <textarea
           value={textToSpeak}
@@ -103,6 +105,12 @@ function CheckPronunciation() {
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">
           <AudioRecorder />
         </div>
+        {audioFile && !isRecording && (
+        <audio controls className="mt-4 w-64 mx-auto">
+          <source src={URL.createObjectURL(audioFile)} type="audio/wav" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
       </div>
       {error && <p className="text-sm text-red-500">{error}</p>}
       <SubmitButton
