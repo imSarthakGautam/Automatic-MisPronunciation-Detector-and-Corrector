@@ -8,7 +8,10 @@ class AudioFile(models.Model):
         return self.file.name
 
 class PracticeSample(models.Model):
-    
+    LANGUAGE_CHOICES = [
+        ('eng', 'English'),
+        ('np', 'Nepali'),
+    ]
     text = models.TextField(
         max_length=1000,
         help_text="The full text sample for practice",
@@ -17,6 +20,12 @@ class PracticeSample(models.Model):
         max_length=200,
         help_text="A short title or description for the sample",
     )  # Compulsory: blank=False, null=False by default
+    language = models.CharField(
+        max_length=3,  
+        choices=LANGUAGE_CHOICES,
+        help_text="Select the language (English or Nepali)",
+         default='eng',
+    )
     actual_pronunciation = models.FileField(
         upload_to="pronunciations/actual/",
         blank=True,

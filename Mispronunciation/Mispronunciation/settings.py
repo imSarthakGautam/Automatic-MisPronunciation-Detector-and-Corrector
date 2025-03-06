@@ -148,9 +148,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Path to the fine-tuned model
 MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'fine_tuned_model')
-W2V_EN_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'wav2vec_en_model')
-W2V_NEP_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'wav2vec_nep_model')
-WHISPER_NEP_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'whisper_nep_model')
+NEP_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'wav2vec_nep_model')
+# W2V_EN_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'wav2vec_en_model')
+
+# WHISPER_NEP_MODEL_DIR = os.path.join(BASE_DIR, 'pronouncePerfect', 'models', 'whisper_nep_model')
 
 
 # Static files (CSS, JavaScript, Images)

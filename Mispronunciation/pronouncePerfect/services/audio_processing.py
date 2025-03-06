@@ -13,19 +13,43 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load ASR model & processor globally
-MODEL_PATH = settings.MODEL_DIR
-processor = Wav2Vec2Processor.from_pretrained(MODEL_PATH)
-model = Wav2Vec2ForCTC.from_pretrained(MODEL_PATH)
+def select_model(language):
+    """
+    Selects and loads a Wav2Vec2 model and processor based on the given language.
+    Args: language (str): The language code ('eng' or 'np').
+    Returns: A tuple containing the processor and model, or None if an error occurs.
+    """
+    try:
+        if language == 'eng':
+            model_path = settings.MODEL_DIR
+            print('english selected')
+        elif language == 'np':
+            model_path = settings.NEP_MODEL_DIR
+            print('nepali selected')
+        else:
+            logger.warning(f"Model language '{language}' not defined. Setting to default (None).")
+            return None  # Return None for invalid language
+
+        processor = Wav2Vec2Processor.from_pretrained(model_path)
+        model = Wav2Vec2ForCTC.from_pretrained(model_path)
+        return processor, model
+
+    except FileNotFoundError:
+        logger.error(f"Model files not found at {model_path}.")
+        return None
+    except Exception as e:
+        logger.exception(f"An unexpected error occurred while loading the model: {e}")
+        return None
 
 # ----- Handles  audio file storage, optional .wav conversion, audio transcription. |---------------
-def process_audio_file(audio_file):
+def process_audio_file(audio_file, language):
     file_path = save_audio_file(audio_file)
 
     if not file_path.lower().endswith(".wav"):
         print(f"File is not WAV, converting: {file_path}")
         file_path = convert_to_wav(file_path)
 
-    transcription = transcribe_audio(file_path)
+    transcription = transcribe_audio(file_path, language)
     os.remove(file_path)  # Cleanup
 
     if os.path.exists(file_path):
@@ -68,7 +92,7 @@ def convert_to_wav(input_path):
         raise RuntimeError(f"Conversion failed: {e}")
 
 # ----- generate transcription --------------------
-def transcribe_audio(file_path):
+def transcribe_audio(file_path, language):
     """
     Transcribes an audio file using Wav2Vec2.
     """
@@ -86,6 +110,8 @@ def transcribe_audio(file_path):
 
         # Write to ensure correct format, overwriting if needed
         sf.write(file_path, waveform, 16000, format='WAV')
+
+        processor, model= select_model(language)
 
         print(f"Processing audio with Wav2Vec2...")
         input_values = processor(waveform, sampling_rate=16000, return_tensors="pt").input_values

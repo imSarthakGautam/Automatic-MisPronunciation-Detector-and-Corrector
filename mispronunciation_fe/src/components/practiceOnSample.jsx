@@ -23,7 +23,7 @@ function PracticeOnSample() {
   useEffect(() => {
     async function fetchPracticeSamples() {
       try {
-        const response = await fetch(`/api/get-practice-samples/`, {
+        const response = await fetch(`/api/get-practice-samples/?language=${encodeURIComponent(language)}`, {
           method: "GET",
           headers: { "X-CSRFToken": getCSRFToken() },
         });

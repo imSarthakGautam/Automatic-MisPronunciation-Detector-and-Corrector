@@ -74,24 +74,7 @@ function Sidebar() {
               <option value="np">Nepali</option>
             </select>
           </div>
-          <div>
-            <label
-              htmlFor="model"
-              className="block text-md font-medium text-gray-800"
-            >
-              Model:
-            </label>
-            <select
-              id="model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              className="mt-1 w-full p-2 border border-[#73A1B2] rounded bg-[#EFE9E1] focus:outline-none focus:ring-2 focus:ring-[#73A1B2]"
-              aria-label="Select model"
-            >
-              <option value="whisper">Whisper</option>
-              <option value="wav2vec2">Wav2Vec2.0</option>
-            </select>
-          </div>
+         
         </div>
       )}
     </aside>
