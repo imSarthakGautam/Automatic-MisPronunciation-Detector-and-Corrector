@@ -21,7 +21,16 @@ function SubmitOrUploadAudio() {
   // Fetch CSRF token on mount
   useEffect(() => {
     fetch(`/api/csrf-token/`, { credentials: "include" })
-      .then((response) => response.json())
+      .then((response) => {
+        // Log the response status
+        console.log("Response Status:", response.status);
+
+        // Convert response to JSON and log the actual content
+        return response.json();
+      })
+      .then((data) => {
+        console.log("CSRF Token Data:", data); // Log the data received from the server
+      })
       .catch((err) => console.error("Error fetching CSRF:", err));
   }, []);
 
@@ -36,6 +45,7 @@ function SubmitOrUploadAudio() {
       formData.append("model", model); // Include model
 
       const csrfToken = getCSRFToken(); // Get the CSRF token from the cookie
+      console.log("csrf token:", csrfToken);
       if (!csrfToken) {
         console.error("CSRF token not found. Please ensure the cookie is set.");
         setTranscription(
@@ -58,13 +68,15 @@ function SubmitOrUploadAudio() {
         throw new Error(`Server error: ${response.status} - ${errorText}`);
       }
       const result = await response.json();
-      console.log("Backend response:", result, 'result.transcription--', result.transcription);
+      console.log(
+        "Backend response:",
+        result,
+        "result.transcription--",
+        result.transcription
+      );
 
       if (result.transcription) {
-
-        setTranscription(result.transcription);// here state should update with re-render
-       
-
+        setTranscription(result.transcription); // here state should update with re-render
       } else if (result.error) {
         throw new Error(result.error);
       } else {

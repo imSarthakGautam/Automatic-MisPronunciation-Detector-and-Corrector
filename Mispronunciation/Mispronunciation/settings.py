@@ -44,27 +44,34 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000', # Allow Django backend itself (if needed)
-    'http://localhost:5174', # Allow your frontend (Vite/React)
-    'http://127.0.0.1:5174',# Alternative for localhost
-    'http://127.0.0.1:8000', # Allow Django backend via 127.0.0.1
+# CSRF settings for development - Allow all origins (with valid scheme)
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',  # Local development origin
+    'http://localhost:5174',  # Adjust for your frontend port if necessary
+    'http://localhost:5173',  # Adjust for your frontend port if necessary
+    'http://127.0.0.1:8000',  # Localhost alternative
+    'http://127.0.0.1:5174',  # Adjust for your frontend port if necessary
+    'http://localhost:5173',  # Another localhost alternative
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True  # Don't enforce HTTPS for local development
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to access the cookie
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cross-site requests (relaxed for local dev)
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://localhost:5174',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:5174',
-]  
+CORS_ALLOW_CREDENTIALS = True  # Allow cookies in cross-origin requests
 
-CSRF_COOKIE_SECURE = False # Set to True in production with HTTPS
+# CORS allowed origins - Specify scheme (http:// or https://)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5174",  # Adjust for your frontend port if necessary
+    "http://localhost:5173",  # Adjust for your frontend port if necessary
+    "http://127.0.0.1:5174",  # Adjust for your frontend port if necessary
+    "http://127.0.0.1:5173",  # Adjust for your frontend port if necessary
+    "http://localhost:8000",   # Django backend
+    "http://127.0.0.1:8000",  # Django backend alternative
+]
 
-CSRF_COOKIE_HTTPONLY = False # Allow JavaScript to read the cookie
-
-CSRF_COOKIE_SAMESITE = 'Lax' # Adjust
+# Allow CORS from all origins (unsafe for production)
+CORS_ALLOW_ALL_ORIGINS = True  # This will allow all domains to access your API.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

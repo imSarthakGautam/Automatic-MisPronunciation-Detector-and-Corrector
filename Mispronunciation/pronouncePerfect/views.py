@@ -7,6 +7,14 @@ from pronouncePerfect.models import PracticeSample
 import os
 import librosa
 
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie
+def csrf_token_view(request):
+    return JsonResponse({"status": "success"})
+
 import logging
 logger = logging.getLogger(__name__)
 # import soundfile as sf
@@ -112,6 +120,4 @@ def get_practice_samples(request):
         return JsonResponse({"samples": samples_list}, safe=False)
     return JsonResponse({"error": "Invalid request method"}, status=400)
 
-@csrf_exempt
-def csrf_token_view(request):
-     return JsonResponse({'status': 'success'})
+
