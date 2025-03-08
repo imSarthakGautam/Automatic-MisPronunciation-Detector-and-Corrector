@@ -353,6 +353,7 @@ Manually test UI components in the browser.
   CSRF_COOKIE_SECURE = True 
   CSRF_COOKIE_HTTPONLY = False # Allow JavaScript to read the cookie
   CSRF_COOKIE_SAMESITE = 'None' 
+  CORS_ALLOW_ALL_ORIGINS= True
 ```
 
 ## Browser Compatibility

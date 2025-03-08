@@ -44,20 +44,25 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+CORS_ALLOW_ALL_ORIGINS= False #set to true in case of errors.
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000', # Allow Django backend itself (if needed)
     'http://localhost:5174', # Allow your frontend (Vite/React)
+    'http://localhost:5173', # Allow your frontend (Vite/React)
     'http://127.0.0.1:5174',# Alternative for localhost
+    'http://127.0.0.1:5173',# Alternative for localhost
     'http://127.0.0.1:8000', # Allow Django backend via 127.0.0.1
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True # Allow Cookies in cross-origin requests
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:5174',
+    'http://localhost:5173',
     'http://127.0.0.1:8000',
     'http://127.0.0.1:5174',
+    'http://127.0.0.1:5173',
 ]  
 
 CSRF_COOKIE_SECURE = False # Set to True in production/ error scenario.
