@@ -8,6 +8,7 @@ model.safetensors
 media/*
 packages/
 Notes/
+venv/
 
 # Byte-compiled / optimized / DLL files
 *.py[cod]

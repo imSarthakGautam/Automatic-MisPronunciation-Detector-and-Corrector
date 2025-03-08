@@ -1,10 +1,10 @@
 import difflib
 import re
+from indicnlp.tokenize import indic_tokenize
 
-# to keep punctuations intact.
+
 def tokenize(text):
-    """Extract words and punctuation together while preserving spaces."""
-    return re.findall(r"\w+|[^\w\s]", text)
+    return list(indic_tokenize.trivial_tokenize(text, lang="ne"))
 
 def compare_texts(transcription, user_input):
 

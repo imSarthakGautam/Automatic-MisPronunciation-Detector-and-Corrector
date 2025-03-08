@@ -36,6 +36,7 @@ function SubmitOrUploadAudio() {
       formData.append("model", model); // Include model
 
       const csrfToken = getCSRFToken(); // Get the CSRF token from the cookie
+      console.log('csrf',csrfToken)
       if (!csrfToken) {
         console.error("CSRF token not found. Please ensure the cookie is set.");
         setTranscription(
