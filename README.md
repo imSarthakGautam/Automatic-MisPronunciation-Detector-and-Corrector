@@ -50,7 +50,9 @@ cd pronouncePerfect
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
+source .venv/bin/activate  
+# On Windows, use 
+`.venv\Scripts\activate`
 ```
 
 #### **Install Dependencies**
@@ -346,6 +348,12 @@ Manually test UI components in the browser.
 - **Transcription Errors** Check **server logs** for HTTP 500 errors or CORS issues
 - **React Not Loading Styles:** Ensure Tailwind is configured in `tailwind.config.js` & `index.css`
 - **Timer Not Updating:** Verify `useEffect` dependencies in `AudioRecorder.jsx`
+- **CSRF Error** -  set allowed origins to `'*'` or/and adjust these settings.
+```python
+  CSRF_COOKIE_SECURE = True 
+  CSRF_COOKIE_HTTPONLY = False # Allow JavaScript to read the cookie
+  CSRF_COOKIE_SAMESITE = 'None' 
+```
 
 ## Browser Compatibility
 
