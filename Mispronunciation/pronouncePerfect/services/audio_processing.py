@@ -2,7 +2,7 @@ import os
 import librosa
 import torch
 import soundfile as sf
-
+import re
 from django.conf import settings
 from pydub import AudioSegment
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
@@ -118,6 +118,9 @@ def transcribe_audio(file_path, language):
         logits = model(input_values).logits
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = processor.decode(predicted_ids[0])
+        if language == 'np':
+            transcription=clean_transcription(transcription)
+
         print(f"Transcription generated: {transcription}")
 
         return transcription.lower()
@@ -125,3 +128,11 @@ def transcribe_audio(file_path, language):
     except Exception as e:
         print(f"Error during transcription: {e}")
         raise RuntimeError(f"Transcription failed: {e}")
+
+
+def clean_transcription(raw_transcription):
+        # Remove all [PAD] tokens
+        cleaned = raw_transcription.replace("[PAD]", "")
+        # Remove extra whitespace
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+        return cleaned
