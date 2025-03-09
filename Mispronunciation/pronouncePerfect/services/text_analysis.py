@@ -5,7 +5,7 @@ import re
 import difflib
 from indicnlp.tokenize import indic_tokenize
 
-def tokenize(text, language="en"):
+def tokenize(text, language="eng"):
     """
     Tokenize text based on language.
     
@@ -16,7 +16,7 @@ def tokenize(text, language="en"):
     Returns:
         list: List of tokens
     """
-    if language == "en":
+    if language == "eng":
         # English tokenization: extract words and punctuation while preserving spaces
         return re.findall(r"\w+|[^\w\s]", text)
     elif language == "np":
