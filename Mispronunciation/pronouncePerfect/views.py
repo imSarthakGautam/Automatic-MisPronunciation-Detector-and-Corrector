@@ -76,7 +76,7 @@ def process_audio_text(request):
             transcription = process_audio_file(audio_file, language)
 
             # Compare transcribed text with user input
-            comparison_result = compare_texts(transcription, text_input)
+            comparison_result = compare_texts(transcription, text_input, language)
 
             return JsonResponse({
                 "transcription": transcription,
