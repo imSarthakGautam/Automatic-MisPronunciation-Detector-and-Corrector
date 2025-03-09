@@ -88,7 +88,7 @@ def process_audio_text(request):
             })
 
         except Exception as e:
-            print(f"Error in process_audio view: {e}")
+            print(f"Error in process_audio text view: {e}")
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=400)
