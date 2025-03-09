@@ -65,12 +65,12 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5173',
 ]  
 
-CSRF_COOKIE_SECURE = False # Set to True in production/ error scenario.
+CSRF_COOKIE_SECURE = True # Set to True in production/ error scenario.
 # CSRF_COOKIE_SECURE = True 
 
 CSRF_COOKIE_HTTPONLY = False # Allow JavaScript to read the cookie
 
-CSRF_COOKIE_SAMESITE = 'Lax' # Adjust to none in error
+CSRF_COOKIE_SAMESITE = 'None' # Adjust to none in error
 # CSRF_COOKIE_SAMESITE = 'None' 
 
 MIDDLEWARE = [
