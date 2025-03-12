@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
-from pronouncePerfect.services import process_audio_file, compare_texts
+from pronouncePerfect.services import process_audio_file, compare_texts,  NepaliTextComparer
 from django.views.decorators.csrf import csrf_exempt
 from pronouncePerfect.models import PracticeSample
 import os
@@ -76,7 +76,11 @@ def process_audio_text(request):
             transcription = process_audio_file(audio_file, language)
 
             # Compare transcribed text with user input
-            comparison_result = compare_texts(transcription, text_input)
+            if language=='eng':
+                comparison_result = compare_texts(transcription, text_input)
+            elif language == 'np':
+                nep = NepaliTextComparer()
+                comparison_result=nep.compare_texts(transcription, text_input)
 
             return JsonResponse({
                 "transcription": transcription,
@@ -84,7 +88,7 @@ def process_audio_text(request):
             })
 
         except Exception as e:
-            print(f"Error in process_audio view: {e}")
+            print(f"Error in process_audio text view: {e}")
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=400)
